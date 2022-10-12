@@ -17,6 +17,15 @@ use App\Models\Kelurahan;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
+
+// Route::view('welcome', 'welcome');
+// Route::view('contact', 'contact');
+
+// Route::get('/', [HomeController::class, 'index']);
+// Route::get('contact/{id}', [ContactController::class, 'create']);
+// Route::post('contact', [ContactController::class, 'store']);
+
+Route::get('/', [LoginController::class, 'index'])->name('login');
