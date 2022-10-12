@@ -1,0 +1,16 @@
+Framework:
+ 1. Laravel 8.53.0
+ 2. Bootstrap@4.6.1
+
+Database:
+ Mysql
+
+Testing:
+ Test Driven Laravel
+
+CSS untuk login:
+  SB Admin 2
+
+Username & password login ke menu website
+Admin: hernandacp@gmail.com | password: 12345
+Operator: candra@gmail.com  | password: 12345
