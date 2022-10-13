@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Kelurahan;
+
+class KelurahanController extends Controller
+{
+    public function index()
+    {
+        $kelurahan = Kelurahan::get();
+        return view('admin.kelurahan_tampil', compact('kelurahan'));
+    }
+
+    public function addView()
+    {
+        return view('admin.kelurahan_tambah');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'kelurahan' => ['required', 'max:50'],
+            'kecamatan' => ['required', 'max:50'],
+            'kota' => ['required', 'max:50'],
+        ]);
+
+        $data = new Kelurahan();
+        $data->kelurahan = $request->kelurahan;
+        $data->kecamatan = $request->kecamatan;
+        $data->kota = $request->kota;
+        $data->save();
+
+        $request->session()->flash('success', 'Berhasil Menambahkan Data Kelurahan: ' . $request->kelurahan);
+        return redirect()->route('kelurahan');
+    }
+}
