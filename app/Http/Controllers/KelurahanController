@@ -35,4 +35,28 @@ class KelurahanController extends Controller
         $request->session()->flash('success', 'Berhasil Menambahkan Data Kelurahan: ' . $request->kelurahan);
         return redirect()->route('kelurahan');
     }
+
+    public function edit($id)
+    {
+        $kelurahan = Kelurahan::findOrFail($id);
+        return view('admin.kelurahan_edit', compact('kelurahan'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'kelurahan' => ['required', 'max:50'],
+            'kecamatan' => ['required', 'max:50'],
+            'kota' => ['required', 'max:50'],
+        ]);
+
+        $data = Kelurahan::findOrFail($id);
+        $data->kelurahan = $request->kelurahan;
+        $data->kecamatan = $request->kecamatan;
+        $data->kota = $request->kota;
+        $data->save();
+
+        $request->session()->flash('success', 'Kelurahan: ' . $request->kelurahan . ' Berhasil Diedit');
+        return redirect()->route('kelurahan');
+    }
 }
