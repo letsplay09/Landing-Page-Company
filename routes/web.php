@@ -27,5 +27,11 @@ use App\Models\Kelurahan;
 // Route::get('/', [HomeController::class, 'index']);
 // Route::get('contact/{id}', [ContactController::class, 'create']);
 // Route::post('contact', [ContactController::class, 'store']);
+Route::group(['middleware' => ['auth', 'is_operator']], function () {
+    Route::get('/pasien', [PasienController::class, 'index'])->name('pasien');
+    Route::post('/pasien', [PasienController::class, 'store'])->name('pasien_store');
+    Route::get('/pasien/tambah', [PasienController::class, 'addView'])->name('pasien_tambah');
+    Route::get('/pasien/cetak/{id}', [PasienController::class, 'cetakKartu']);
+});
 
 Route::get('/', [LoginController::class, 'index'])->name('login');
