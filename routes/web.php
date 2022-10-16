@@ -35,3 +35,16 @@ Route::group(['middleware' => ['auth', 'is_operator']], function () {
 });
 
 Route::get('/', [LoginController::class, 'index'])->name('login');
+
+Route::post('/', [LoginController::class, 'authenticate']);
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+
+
+Route::group(['middleware' => ['auth', 'is_admin']], function () {
+    Route::get('/kelurahan', [KelurahanController::class, 'index'])->name('kelurahan');
+    Route::post('/kelurahan', [KelurahanController::class, 'store'])->name('kelurahan_store');
+    Route::get('/kelurahan/tambah', [KelurahanController::class, 'addView'])->name('kelurahan_tambah');
+    Route::get('/kelurahan/edit/{id}', [KelurahanController::class, 'edit']);
+    Route::put('/kelurahan/update/{id}', [KelurahanController::class, 'update']);
+});
